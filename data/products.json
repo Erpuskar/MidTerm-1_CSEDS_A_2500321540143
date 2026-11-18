@@ -1,0 +1,23 @@
+{
+  "nextId": 4,
+  "products": [
+    {
+      "id": 1,
+      "name": "a37",
+      "price": 20000,
+      "category": "smartphone"
+    },
+    {
+      "id": 2,
+      "name": "oneplus13t",
+      "price": 45000,
+      "category": "smartphone"
+    },
+    {
+      "id": 3,
+      "name": "casio 200",
+      "price": 3400,
+      "category": "watch"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product inventory</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <div>
+          <h1>Product inventory</h1>
+          <p class="summary" id="summary">Loading products…</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="add-button">Add product</button>
+      </header>
+
+      <main>
+        <section class="toolbar" aria-label="Find and arrange products">
+          <div class="control control-grow">
+            <label for="search">Search</label>
+            <input id="search" type="search" placeholder="Name, category or ID" autocomplete="off" />
+          </div>
+          <div class="control">
+            <label for="category-filter">Category</label>
+            <select id="category-filter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="control">
+            <label for="sort">Sort by</label>
+            <select id="sort">
+              <option value="id-asc">Oldest first</option>
+              <option value="id-desc">Newest first</option>
+              <option value="name-asc">Name A to Z</option>
+              <option value="price-asc">Price, low to high</option>
+              <option value="price-desc">Price, high to low</option>
+            </select>
+          </div>
+          <div class="control">
+            <span class="label" id="view-label">View</span>
+            <div class="segmented" role="group" aria-labelledby="view-label">
+              <button type="button" data-view="cards" aria-pressed="true">Cards</button>
+              <button type="button" data-view="table" aria-pressed="false">Table</button>
+            </div>
+          </div>
+        </section>
+
+        <div id="content"></div>
+      </main>
+    </div>
+
+    <!-- Add / edit dialog -->
+    <dialog id="product-dialog" aria-labelledby="form-title">
+      <form id="product-form" class="dialog-body" novalidate>
+        <h2 id="form-title">Add product</h2>
+        <p class="dialog-sub" id="form-id"></p>
+
+        <div class="field">
+          <label for="field-name">Name</label>
+          <input id="field-name" type="text" maxlength="80" autocomplete="off" aria-describedby="error-name" />
+          <p class="field-error" id="error-name"></p>
+        </div>
+
+        <div class="field">
+          <label for="field-price">Price (₹)</label>
+          <input id="field-price" type="number" min="0" step="0.01" inputmode="decimal" aria-describedby="error-price" />
+          <p class="field-error" id="error-price"></p>
+        </div>
+
+        <div class="field">
+          <label for="field-category">Category</label>
+          <input id="field-category" type="text" maxlength="40" list="category-options" autocomplete="off" aria-describedby="error-category" />
+          <datalist id="category-options"></datalist>
+          <p class="field-error" id="error-category"></p>
+        </div>
+
+        <p class="field-error" id="form-error" role="alert"></p>
+
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-secondary" id="cancel-button">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save-button">Add product</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Delete confirmation dialog -->
+    <dialog id="delete-dialog" aria-labelledby="delete-title">
+      <div class="dialog-body">
+        <h2 id="delete-title">Delete this product?</h2>
+        <p class="dialog-text"><strong id="delete-name"></strong> will be removed from your inventory. This can’t be undone.</p>
+        <p class="field-error" id="delete-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-secondary" id="delete-cancel">Cancel</button>
+          <button type="button" class="btn btn-danger" id="delete-confirm">Delete product</button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="/js/app.js" defer></script>
+  </body>
+</html>
